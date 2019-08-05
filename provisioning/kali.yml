@@ -1,0 +1,136 @@
+---
+- hosts: device
+  connection: local
+  tasks:
+    - name: Update the package database
+      apt:
+        update_cache: yes
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+    - name: Remove useless packages from the cache
+      apt:
+        autoclean: yes
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+    - name: Install packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - ant
+          - atop
+          - awscli
+          - bash
+          - bc
+          - build-essential
+          - bzip2
+          - cargo
+          - clang
+          - clang-format
+          - cmake
+          - coreutils
+          - cpio
+          - curl
+          - cython
+          - dmidecode
+          - dnsutils
+          - dos2unix
+          - enscript
+          - ethtool
+          - fping
+          - gawk
+          - git
+          - gobuster
+          - golang
+          - grep
+          - gzip
+          - htop
+          - hwloc
+          - iftop
+          - iotop
+          - iperf3
+          - ipython
+          - ksh
+          - less
+          - lftp
+          - libboost-all-dev
+          - libglib2.0-dev
+          - libkeyutils-dev
+          - libperl-critic-perl
+          - libssl-dev
+          - lsof
+          - make
+          - mlocate
+          - mtr
+          - mutt
+          - net-tools
+          - ninja-build
+          - nmap
+          - ntp
+          - openjdk-11-jdk
+          - openssh-client
+          - openssh-server
+          - openssl
+          - p7zip-full
+          - parted
+          - pbzip2
+          - pep8
+          - perl
+          - perltidy
+          - pigz
+          - pkg-config
+          - procps
+          - puppet
+          - puppet-lint
+          - pyflakes
+          - pylint
+          - python
+          - python-boto
+          - python-jinja2
+          - python-nose
+          - python-pip
+          - python-psutil
+          - python-requests
+          - python-six
+          - python-virtualenv
+          - python-yaml
+          - python3-jinja2
+          - python3-psutil
+          - python3-requests
+          - python3-six
+          - python3-yaml
+          - rsync
+          - rtorrent
+          - ruby
+          - rustc
+          - s4cmd
+          - screen
+          - sed
+          - silversearcher-ag
+          - strace
+          - subversion
+          - sudo
+          - sysstat
+          - tar
+          - tcpdump
+          - tcptraceroute
+          - tmux
+          - vim-nox
+          - w3m
+          - weechat
+          - wget
+          - xz-utils
+          - zsh
+    - name: Enable/start services
+      service:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      with_items:
+        - cron
+        - ntp
+        - rsyslog
+        - ssh
+        - sysstat
