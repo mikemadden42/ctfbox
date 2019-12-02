@@ -2,18 +2,6 @@
 - hosts: device
   connection: local
   tasks:
-    - name: Update the package database
-      apt:
-        update_cache: yes
-    - name: Update all packages to the latest version
-      apt:
-        upgrade: dist
-    - name: Remove useless packages from the cache
-      apt:
-        autoclean: yes
-    - name: Remove dependencies that are no longer required
-      apt:
-        autoremove: yes
     - name: Install packages
       apt:
         name: "{{ packages }}"
@@ -93,9 +81,9 @@
           - pylint3
           - python
           - python-boto
-          - python-boto3
           - python-jinja2
           - python-nose
+          - python-packaging
           - python-pip
           - python-psutil
           - python-requests
@@ -106,6 +94,7 @@
           - python3-boto3
           - python3-jinja2
           - python3-nose
+          - python3-packaging
           - python3-pip
           - python3-psutil
           - python3-pytest
@@ -134,6 +123,7 @@
           - weechat
           - wget
           - xz-utils
+          - yamllint
           - yapf3
           - zsh
     - name: Enable/start services
